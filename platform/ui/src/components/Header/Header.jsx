@@ -24,19 +24,23 @@ function Header({ children, menuOptions, isReturnEnabled, onClickReturnButton, i
       <div className="flex justify-between flex-1">
         <div className="flex items-center">
           {/* // TODO: Should preserve filter/sort
-              // Either injected service? Or context (like react router's `useLocation`?) */}
+              // Either injected service? Or context (like react router's `useLocation`?)
+              // Remove return button
           <div
             className={classNames("inline-flex items-center mr-3", isReturnEnabled && 'cursor-pointer')}
             onClick={onClickReturn}
           >
             {isReturnEnabled && <Icon name="chevron-left" className="w-8 text-primary-active" />}
             <div className="ml-4">{WhiteLabeling ? CustomLogo(React) : <Svg name="logo-ohif" />}</div>
-          </div>
+          </div>    
+           */}
+          
+          <div className="ml-4">{WhiteLabeling ? CustomLogo(React) : <Svg name="logo-ohif" />}</div>
         </div>
         <div className="flex items-center">{children}</div>
         <div className="flex items-center">
           <span className="mr-3 text-lg text-common-light">
-            {t('INVESTIGATIONAL USE ONLY')}
+            {t('GIC Indonesia - Electronic Medical Record v2')}
           </span>
           <Dropdown id="options" showDropdownIcon={false} list={menuOptions}>
             <IconButton

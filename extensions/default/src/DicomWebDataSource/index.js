@@ -82,7 +82,23 @@ function createDicomWebApi(dicomWebConfig, UserAuthenticationService) {
     initialize: ({ params, query }) => {
       const { StudyInstanceUIDs: paramsStudyInstanceUIDs } = params;
       const queryStudyInstanceUIDs = query.get('StudyInstanceUIDs');
+      const branchCode = query.get('BranchCode');
+      
+      // Change dicomWeb Url with spesified branchCode
+      dicomWebConfig.wadoUriRoot = dicomWebConfig.wadoUriRoot.replace('{branchCode}',branchCode)
+      dicomWebConfig.qidoRoot = dicomWebConfig.qidoRoot.replace('{branchCode}',branchCode)
+      dicomWebConfig.wadoRoot = dicomWebConfig.wadoRoot.replace('{branchCode}',branchCode)
+      
+      qidoDicomWebClient.baseURL = qidoDicomWebClient.baseURL.replace('{branchCode}',branchCode)
+      qidoDicomWebClient.qidoURL = qidoDicomWebClient.qidoURL.replace('{branchCode}',branchCode)
+      qidoDicomWebClient.wadoURL = qidoDicomWebClient.wadoURL.replace('{branchCode}',branchCode)
+      qidoDicomWebClient.stowURL = qidoDicomWebClient.stowURL.replace('{branchCode}',branchCode)
 
+      wadoDicomWebClient.baseURL = wadoDicomWebClient.baseURL.replace('{branchCode}',branchCode)
+      wadoDicomWebClient.qidoURL = wadoDicomWebClient.qidoURL.replace('{branchCode}',branchCode)
+      wadoDicomWebClient.wadoURL = wadoDicomWebClient.wadoURL.replace('{branchCode}',branchCode)
+      wadoDicomWebClient.stowURL = wadoDicomWebClient.stowURL.replace('{branchCode}',branchCode)
+      
       const StudyInstanceUIDs =
         queryStudyInstanceUIDs || paramsStudyInstanceUIDs;
       const StudyInstanceUIDsAsArray =

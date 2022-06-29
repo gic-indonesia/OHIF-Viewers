@@ -86,9 +86,9 @@ function LoginComponent(userManager) {
     }
 
     if (loginHint !== null) {
-      userManager.signinRedirect({ login_hint: loginHint });
+      //userManager.signinRedirect({ login_hint: loginHint });
     } else {
-      userManager.signinRedirect();
+      //userManager.signinRedirect();
     }
   });
 
@@ -103,16 +103,17 @@ function OpenIdConnectRoutes({
   const userManager = initUserManager(oidc, routerBasename);
 
   const getAuthorizationHeader = () => {
-    const user = UserAuthenticationService.getUser();
+    const queryParams = new URLSearchParams(location.search);
+    const token = queryParams.get('Token')
 
     return {
-      Authorization: `Bearer ${user.access_token}`
+      Authorization: `Bearer ${token}`
     };
   }
 
   const handleUnauthenticated = () => {
-    userManager.signinRedirect()
-
+    console.log(`handleUnauthenticated`)
+    //userManager.signinRedirect()
     // return null because this is used in a react component
     return null;
   };
@@ -140,12 +141,15 @@ function OpenIdConnectRoutes({
   // const pathnameRelative = pathname.replace(routerBasename,'');
 
   if (pathname !== redirect_uri) {
+    console.log(JSON.stringify({ pathname, search }));
     sessionStorage.setItem(
       'ohif-redirect-to',
       JSON.stringify({ pathname, search })
     );
   }
-
+  
+  return null;
+  /*
   return (
     <Routes basename={routerBasename}>
       <Route
@@ -186,6 +190,7 @@ function OpenIdConnectRoutes({
       />
     </Routes>
   );
+  */
 }
 
 export default OpenIdConnectRoutes;

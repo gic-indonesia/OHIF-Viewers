@@ -5,7 +5,7 @@ export const PrivateRoute = ({ children, handleUnauthenticated }) => {
   const [{ user, enabled }] = useUserAuthentication();
 
   if (enabled && !user) {
-    return handleUnauthenticated();
+    //return handleUnauthenticated();
   }
 
   return children;
