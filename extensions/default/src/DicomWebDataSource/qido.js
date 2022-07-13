@@ -164,7 +164,8 @@ function mapParams(params, options = {}) {
 
   const { supportsWildcard } = options;
   const withWildcard = value => {
-    return supportsWildcard && value ? `*${value}*` : value;
+    //return supportsWildcard && value ? `*${value}*` : value;
+    return value;
   };
 
   const parameters = {
